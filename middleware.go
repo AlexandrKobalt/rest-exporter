@@ -1,10 +1,8 @@
-package pkg
+package main
 
 import (
 	"net/http"
 	"time"
-
-	github.com/AlexandrKobalt/rest-exporter
 )
 
 func StatsMiddleware(next http.Handler) http.Handler {
@@ -17,10 +15,10 @@ func StatsMiddleware(next http.Handler) http.Handler {
 
 		processTime := endTime.Sub(startTime)
 
-		processData := stats.ProcessData{
+		processData := ProcessData{
 			RequestProcessTime: processTime,
 		}
 
-		stats.UpdateStat(r.URL.Path, processData)
+		UpdateStat(r.URL.Path, processData)
 	})
 }
