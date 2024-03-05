@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"gitlab.smd.local/backend/memes.git/internal/stats"
+	github.com/AlexandrKobalt/rest-exporter
 )
 
 func StatsMiddleware(next http.Handler) http.Handler {
