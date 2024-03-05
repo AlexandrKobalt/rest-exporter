@@ -1,3 +1,3 @@
-module gitlab.smd.local/backend/memes.git
+module github.com/AlexandrKobalt/rest-exporter
 
 go 1.21.6
