@@ -49,14 +49,18 @@ func (stats *RouteStats) updateTotalRequestsCount() {
 }
 
 func (stats *RouteStats) updateRequestsFrequency() {
-	convertedLastRequestTime := stats.LastRequestTime
-	upTime := convertedLastRequestTime.Sub(initTime).Seconds()
+	upTime := stats.LastRequestTime.Sub(initTime).Seconds()
 	stats.RequestsFrequency = float64(stats.TotalRequestsCount) / upTime
 }
 
 func (stats *RouteStats) updateAverageProcessTime(value time.Duration) {
-	averageValue := (stats.AverageProcessTime + value) / 2
-	stats.AverageProcessTime = averageValue
+	totalRequests := float64(stats.TotalRequestsCount)
+	totalProcessTime := float64(stats.AverageProcessTime * time.Duration(stats.TotalRequestsCount))
+
+	totalProcessTime += float64(value)
+
+	stats.AverageProcessTime = time.Duration(totalProcessTime / totalRequests)
+	stats.TotalRequestsCount++
 }
 
 func (stats *RouteStats) updateLastRequestTime() {
