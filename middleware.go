@@ -1,4 +1,4 @@
-package pkg
+package restexporter
 
 import (
 	"net/http"
